@@ -1,0 +1,473 @@
+﻿<Window x:Class="RefugeAnimauxWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Refuge des Animaux"
+        Height="760"
+        Width="950"
+        Background="#BFDFFF">
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,6,0,3"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="23"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
+            <Setter Property="Padding" Value="4,1"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
+            <Setter Property="Padding" Value="4,1"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Margin" Value="0,8,0,6"/>
+            <Setter Property="Background" Value="#0078D7"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style x:Key="TitreSection" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#003D99"/>
+            <Setter Property="Margin" Value="0,10,0,10"/>
+        </Style>
+
+        <Style x:Key="Bloc" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+        </Style>
+    </Window.Resources>
+
+    <TabControl Margin="15" Background="#EAF4FF">
+
+        <TabItem Background="OrangeRed">
+            <TabItem.Header>
+                <TextBlock Text="Accueil"
+                   FontWeight="Bold"
+                   Foreground="Black"/>
+            </TabItem.Header>
+            <Grid Background="#EAF4FF">
+                <Border Background="White" CornerRadius="12" Padding="30" Margin="40">
+                    <StackPanel>
+                        <TextBlock Text="🐶 Refuge des Animaux 🐱"
+                                   FontSize="34"
+                                   FontWeight="Bold"
+                                   Foreground="#003D99"
+                                   HorizontalAlignment="Center"/>
+
+                        <TextBlock Text="Application de gestion du refuge"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,15,0,25"/>
+
+                        <TextBlock TextWrapping="Wrap"
+                                   FontSize="15"
+                                   TextAlignment="Center">
+Cette application permet de gérer les animaux, les contacts, les familles d'accueil,
+les adoptions, les entrées, les sorties, les vaccinations et les compatibilités.
+
+Utilisez les onglets pour accéder aux différentes fonctionnalités.
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </TabItem>
+
+        <TabItem Background="#4CAF50">
+            <TabItem.Header>
+                <TextBlock Text="Animaux"
+                   FontWeight="Bold"
+                   Foreground="Black"/>
+            </TabItem.Header>
+
+            <ScrollViewer>
+                <StackPanel Margin="20">
+
+                    <Border Style="{StaticResource Bloc}">
+                        <StackPanel>
+                            <TextBlock Text="Ajouter un animal" Style="{StaticResource TitreSection}"/>
+
+                            <TextBlock Text="Identifiant"/>
+                            <TextBox x:Name="txtId"/>
+
+                            <TextBlock Text="Nom"/>
+                            <TextBox x:Name="txtNom"/>
+
+                            <TextBlock Text="Type"/>
+                            <ComboBox x:Name="cmbType">
+                                <ComboBoxItem Content="chat"/>
+                                <ComboBoxItem Content="chien"/>
+                            </ComboBox>
+
+                            <TextBlock Text="Sexe"/>
+                            <ComboBox x:Name="cmbSexe">
+                                <ComboBoxItem Content="M"/>
+                                <ComboBoxItem Content="F"/>
+                            </ComboBox>
+
+                            <TextBlock Text="Particularités"/>
+                            <TextBox x:Name="txtParticularites"/>
+
+                            <TextBlock Text="Description"/>
+                            <TextBox x:Name="txtDescription"/>
+
+                            <TextBlock Text="Stérilisé"/>
+                            <CheckBox x:Name="chkSterilise" Content="Oui"/>
+
+                            <TextBlock Text="Date stérilisation (yyyy-mm-dd)"/>
+                            <DatePicker x:Name="dpDateSterilisation"/>
+
+                            <TextBlock Text="Date décès (yyyy-mm-dd)"/>
+                            <DatePicker x:Name="dpDateDeces"/>
+
+                            <TextBlock Text="Date naissance (yyyy-mm-dd)"/>
+                            <DatePicker x:Name="dpDateNaissance"/>
+
+                            <Button Content="Ajouter animal" Click="BtnAjouter_Click"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource Bloc}">
+                        <StackPanel>
+                            <TextBlock Text="Liste / consulter / supprimer" Style="{StaticResource TitreSection}"/>
+
+                            <Button Content="Afficher les animaux" Click="BtnAfficher_Click"/>
+
+                            <ListBox x:Name="lstAnimaux"
+                                     Height="90"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+                            <TextBlock Text="Animal à consulter"/>
+                            <ComboBox x:Name="cmbAnimalConsulter"/>
+                            <Button Content="Consulter animal" Click="BtnConsulter_Click"/>
+
+                            <TextBlock Text="Animal à supprimer"/>
+                            <ComboBox x:Name="cmbAnimalSupprimer"/>
+                            <Button Content="Supprimer animal" Click="BtnSupprimer_Click"/>
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
+
+        <TabItem Background="#2196F3">
+            <TabItem.Header>
+                <TextBlock Text="Contacts"
+                   FontWeight="Bold"
+                   Foreground="Black"/>
+            </TabItem.Header>
+            <ScrollViewer>
+                <StackPanel Margin="20">
+
+                    <Border Style="{StaticResource Bloc}">
+                        <StackPanel>
+                            <TextBlock Text="Ajouter un contact" Style="{StaticResource TitreSection}"/>
+
+                            <TextBlock Text="Nom contact"/>
+                            <TextBox x:Name="txtContactNom"/>
+
+                            <TextBlock Text="Prénom contact"/>
+                            <TextBox x:Name="txtContactPrenom"/>
+
+                            <TextBlock Text="Registre national"/>
+                            <TextBox x:Name="txtContactRN"/>
+
+                            <TextBlock Text="Rue"/>
+                            <TextBox x:Name="txtContactRue"/>
+
+                            <TextBlock Text="Code postal"/>
+                            <TextBox x:Name="txtContactCp"/>
+
+                            <TextBlock Text="Localité"/>
+                            <TextBox x:Name="txtContactLocalite"/>
+
+                            <TextBlock Text="GSM"/>
+                            <TextBox x:Name="txtContactGsm"/>
+
+                            <TextBlock Text="Téléphone"/>
+                            <TextBox x:Name="txtContactTelephone"/>
+
+                            <TextBlock Text="Email"/>
+                            <TextBox x:Name="txtContactEmail"/>
+
+                            <Button Content="Ajouter contact" Click="BtnAjouterContact_Click"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource Bloc}">
+                        <StackPanel>
+                            <TextBlock Text="Liste / modifier / supprimer" Style="{StaticResource TitreSection}"/>
+
+                            <Button Content="Afficher les contacts" Click="BtnAfficherContacts_Click"/>
+
+                            <ListBox x:Name="lstContacts"
+                                     Height="90"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+                            <TextBlock Text="Contact à modifier"/>
+                            <ComboBox x:Name="cmbContactModifier"/>
+
+                            <TextBlock Text="Nouvelle adresse"/>
+                            <TextBox x:Name="txtAdresse"/>
+
+                            <TextBlock Text="Nouveau GSM"/>
+                            <TextBox x:Name="txtGsm"/>
+
+                            <TextBlock Text="Nouveau téléphone"/>
+                            <TextBox x:Name="txtTelephone"/>
+
+                            <TextBlock Text="Nouvel email"/>
+                            <TextBox x:Name="txtEmail"/>
+
+                            <Button Content="Modifier contact" Click="BtnModifierContact_Click"/>
+
+                            <TextBlock Text="Contact à supprimer"/>
+                            <ComboBox x:Name="cmbContactSupprimer"/>
+
+                            <Button Content="Supprimer contact" Click="BtnSupprimerContact_Click"/>
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
+
+        <TabItem Background="#FF9800">
+            <TabItem.Header>
+                <TextBlock Text="Adoptions"
+                   FontWeight="Bold"
+                   Foreground="Black"/>
+            </TabItem.Header>
+            <ScrollViewer>
+                <StackPanel Margin="20">
+
+                    <Border Style="{StaticResource Bloc}">
+                        <StackPanel>
+                            <TextBlock Text="Famille d'accueil" Style="{StaticResource TitreSection}"/>
+
+                            <TextBlock Text="Animal famille accueil"/>
+                            <ComboBox x:Name="cmbFAAnimal"/>
+
+                            <TextBlock Text="Contact famille accueil"/>
+                            <ComboBox x:Name="cmbFAContact"/>
+
+                            <TextBlock Text="Date début famille accueil (yyyy-MM-dd)"/>
+                            <DatePicker x:Name="dpFADateDebut"/>
+
+                            <Button Content="Ajouter famille d'accueil" Click="BtnAjouterFamilleAccueil_Click"/>
+
+                            <Button Content="Afficher familles d'accueil" Click="BtnAfficherFamillesAccueil_Click"/>
+
+                            <ListBox x:Name="lstFamillesAccueil"
+                                     Height="70"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource Bloc}">
+                        <StackPanel>
+                            <TextBlock Text="Adoption" Style="{StaticResource TitreSection}"/>
+
+                            <TextBlock Text="Animal adoption"/>
+                            <ComboBox x:Name="cmbAdoptionAnimal"/>
+
+                            <TextBlock Text="Contact adoption"/>
+                            <ComboBox x:Name="cmbAdoptionContact"/>
+
+                            <TextBlock Text="Date demande adoption (yyyy-MM-dd)"/>
+                            <DatePicker x:Name="dpAdoptionDateDemande"/>
+
+                            <Button Content="Ajouter adoption" Click="BtnAjouterAdoption_Click"/>
+
+                            <Button Content="Afficher adoptions" Click="BtnAfficherAdoptions_Click"/>
+
+                            <ListBox x:Name="lstAdoptions"
+                                     Height="70"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource Bloc}">
+                        <StackPanel>
+                            <TextBlock Text="Modifier statut adoption" Style="{StaticResource TitreSection}"/>
+
+                            <TextBlock Text="ID adoption"/>
+                            <ComboBox x:Name="cmbIdAdoption"/>
+
+                            <TextBlock Text="Nouveau statut"/>
+                            <ComboBox x:Name="cmbStatutAdoption">
+                                <ComboBoxItem Content="demande"/>
+                                <ComboBoxItem Content="acceptee"/>
+                                <ComboBoxItem Content="rejet_environnement"/>
+                                <ComboBoxItem Content="rejet_comportement"/>
+                            </ComboBox>
+
+                            <Button Content="Modifier statut adoption" Click="BtnModifierStatutAdoption_Click"/>
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
+
+        <TabItem Background="#9C27B0">
+            <TabItem.Header>
+                <TextBlock Text="Entrées / Sorties"
+                   FontWeight="Bold"
+                   Foreground="Black"/>
+            </TabItem.Header>
+            <ScrollViewer>
+                <StackPanel Margin="20">
+
+                    <Border Style="{StaticResource Bloc}">
+                        <StackPanel>
+                            <TextBlock Text="Entrée" Style="{StaticResource TitreSection}"/>
+
+                            <TextBlock Text="Animal entrée"/>
+                            <ComboBox x:Name="cmbEntreeAnimal"/>
+
+                            <TextBlock Text="Contact entrée"/>
+                            <ComboBox x:Name="cmbEntreeContact"/>
+
+                            <TextBlock Text="Raison entrée"/>
+                            <ComboBox x:Name="cmbEntreeRaison">
+                                <ComboBoxItem Content="abandon"/>
+                                <ComboBoxItem Content="errant"/>
+                                <ComboBoxItem Content="deces_proprietaire"/>
+                                <ComboBoxItem Content="saisie"/>
+                                <ComboBoxItem Content="retour_adoption"/>
+                                <ComboBoxItem Content="retour_famille_accueil"/>
+                            </ComboBox>
+
+                            <TextBlock Text="Date entrée (yyyy-MM-dd)"/>
+                            <DatePicker x:Name="dpEntreeDate"/>
+
+                            <Button Content="Ajouter entrée" Click="BtnAjouterEntree_Click"/>
+
+                            <Button Content="Afficher entrées" Click="BtnAfficherEntrees_Click"/>
+
+                            <ListBox x:Name="lstEntrees"
+                                     Height="70"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource Bloc}">
+                        <StackPanel>
+                            <TextBlock Text="Sortie" Style="{StaticResource TitreSection}"/>
+
+                            <TextBlock Text="Animal sortie"/>
+                            <ComboBox x:Name="cmbSortieAnimal"/>
+
+                            <TextBlock Text="Contact sortie"/>
+                            <ComboBox x:Name="cmbSortieContact"/>
+
+                            <TextBlock Text="Raison sortie"/>
+                            <ComboBox x:Name="cmbSortieRaison">
+                                <ComboBoxItem Content="adoption"/>
+                                <ComboBoxItem Content="famille_accueil"/>
+                                <ComboBoxItem Content="deces"/>
+                                <ComboBoxItem Content="transfert"/>
+                            </ComboBox>
+
+                            <TextBlock Text="Date sortie (yyyy-MM-dd)"/>
+                            <DatePicker x:Name="dpSortieDate"/>
+
+                            <Button Content="Ajouter sortie" Click="BtnAjouterSortie_Click"/>
+
+                            <Button Content="Afficher sorties" Click="BtnAfficherSorties_Click"/>
+
+                            <ListBox x:Name="lstSorties"
+                                     Height="70"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
+
+        <TabItem Background="#E91E63">
+            <TabItem.Header>
+                <TextBlock Text="Soins"
+                   FontWeight="Bold"
+                   Foreground="Black"/>
+            </TabItem.Header>
+            <ScrollViewer>
+                <StackPanel Margin="20">
+
+                    <Border Style="{StaticResource Bloc}">
+                        <StackPanel>
+                            <TextBlock Text="Vaccination" Style="{StaticResource TitreSection}"/>
+
+                            <TextBlock Text="Animal vaccination"/>
+                            <ComboBox x:Name="cmbVaccinAnimal"/>
+
+                            <TextBlock Text="Nom vaccin"/>
+                            <TextBox x:Name="txtVaccinNom"/>
+
+                            <TextBlock Text="Date vaccination (yyyy-MM-dd)"/>
+                            <DatePicker x:Name="dpVaccinDate"/>
+
+                            <Button Content="Ajouter vaccination" Click="BtnAjouterVaccination_Click"/>
+
+                            <Button Content="Afficher vaccinations"
+                                    Click="BtnAfficherVaccinations_Click"/>
+
+                            <ListBox x:Name="lstVaccinations"
+                                     Height="50"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource Bloc}">
+                        <StackPanel>
+                            <TextBlock Text="Compatibilité" Style="{StaticResource TitreSection}"/>
+
+                            <TextBlock Text="Animal compatibilité"/>
+                            <ComboBox x:Name="cmbCompAnimal"/>
+
+                            <TextBlock Text="Compatibilité"/>
+                            <ComboBox x:Name="cmbCompatibilite">
+                                <ComboBoxItem Content="chat"/>
+                                <ComboBoxItem Content="chien"/>
+                                <ComboBoxItem Content="jeune enfant"/>
+                                <ComboBoxItem Content="enfant"/>
+                                <ComboBoxItem Content="jardin"/>
+                                <ComboBoxItem Content="poney"/>
+                            </ComboBox>
+
+                            <TextBlock Text="Valeur"/>
+                            <ComboBox x:Name="cmbValeurCompatibilite">
+                                <ComboBoxItem Content="oui"/>
+                                <ComboBoxItem Content="non"/>
+                                <ComboBoxItem Content="non testé"/>
+                            </ComboBox>
+
+                            <Button Content="Ajouter compatibilité" Click="BtnAjouterCompatibilite_Click"/>
+                            <Button Content="Afficher compatibilités"
+                                    Click="BtnAfficherCompatibilites_Click"/>
+
+                            <ListBox x:Name="lstCompatibilites"
+                                     Height="50"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
+
+    </TabControl>
+</Window>
